@@ -17,6 +17,12 @@ List information about the FILEs (the current directory by default).
 
 pyls is a Python implementation of 'ls'. It can be used to list information about the PATHs (the current directory by default).
 
+pyls uses a tree structure - directories being the nodes (unless it is an empty directory) and files being the leaf nodes - in the backend to represent the filesystem, making it flexible and easy to use.
+
+pyls has no dependencies other than Python 3.12 or higher.
+
+Furthermore, pyls has a time-complexity of O(1) to fetch information from the immediate children of a node, and O(n) to fetch information from the entire tree. For very large and complex filesystem trees, the time-complexity could further be improved using a breadth-first or depth-first search (not yet implemented).
+
 ### Prerequisites
 
 pyls can be installed on any system with python 3.12 or higher.
