@@ -64,3 +64,40 @@ def test_file_system_invalid_json_path() -> None:
 def test_file_system_invalid_node_path() -> None:
     file_system = FileSystem("structure.json")
     assert file_system.fetch_node("invalid/path") is None
+
+def test_file_system_invalid_node_path_1() -> None:
+    file_system = FileSystem("structure.json")
+    return_message   = file_system.ls(
+        include_all_details=True,
+        show_hidden_files=True,
+        sort_in_reverse=True,
+        sort_by_last_modified_time=True,
+        display_sizes_in_human_readable_format=True,
+        filter_by_type=None,
+        name_or_path_to_node="invalid/path",
+    )
+    assert return_message == "error: cannot access invalid/path:                 No such file or directory"
+
+def test_file_system_filter_nodes_dir() -> None:
+    file_system = FileSystem("structure.json")
+    assert file_system.root.children is not None
+    nodes = list(file_system.root.children.values())
+    filtered: list[Node] = file_system.filter_nodes(nodes=nodes, filter_by="dir")
+    assert isinstance(filtered, list)
+    assert all([node.is_directory for node in filtered])
+
+def test_file_system_filter_nodes_file() -> None:
+    file_system = FileSystem("structure.json")
+    assert file_system.root.children is not None
+    nodes = list(file_system.root.children.values())
+    filtered: list[Node] = file_system.filter_nodes(nodes=nodes, filter_by="file")
+    assert isinstance(filtered, list)
+    assert all([not node.is_directory for node in filtered])
+
+def test_file_system_filter_nodes_robustness() -> None:
+    file_system = FileSystem("structure.json")
+    assert file_system.root.children is not None
+    nodes = list(file_system.root.children.values())
+    filtered: list[Node] = file_system.filter_nodes(nodes=nodes, filter_by="folder")
+    assert isinstance(filtered, list)
+    assert nodes == filtered

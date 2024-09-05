@@ -79,6 +79,39 @@ def node_3() -> Node:
         is_directory=True,
     )
 
+@pytest.fixture
+def node_4() -> Node:
+    """Fixture for directory Node class."""
+
+    name = "xst"
+    size = 4096
+    time_modified = 1699941437
+    permissions = "drwxr-xr-x"
+
+    return Node(
+        name=name,
+        time_modified_int=time_modified,
+        size=size,
+        permissions=permissions,
+        is_directory=True,
+    )
+
+@pytest.fixture
+def node_5() -> Node:
+    """Fixture for directory Node class."""
+
+    name = "yst"
+    size = 4096
+    time_modified = 1699941437
+    permissions = "drwxr-xr-x"
+
+    return Node(
+        name=name,
+        time_modified_int=time_modified,
+        size=size,
+        permissions=permissions,
+        is_directory=True,
+    )
 
 def test_hidden_node(hidden_node_1: Node) -> None:
     """Test hidden node."""
@@ -147,10 +180,71 @@ def test_add_child_valid_path(node_1: Node, node_2: Node, node_3: Node,) -> None
     assert child_node is not None
     assert child_node.name == node_1.name
 
+def test_deep_nested_tree_features_1(
+        node_1: Node,
+        node_2: Node,
+        node_3: Node,
+        node_4: Node,
+        node_5: Node,
+    ) -> None:
+    """Test get_child method of Node class."""
+    node_3.add_child(node_2)
+    node_3.add_child(node_4)
+    node_4.add_child(node_5)
+    node_5.add_child(node_1)
+    
+    assert node_3.children is not None
+    child_node = node_3.get_child(f"{node_4.name}/{node_5.name}/{node_1.name}")
+    assert child_node is not None
+    assert child_node.name == node_1.name
+
+def test_deep_nested_tree_features_2(
+        node_1: Node,
+        node_2: Node,
+        node_3: Node,
+        node_4: Node,
+        node_5: Node,
+    ) -> None:
+    """Test get_child method of Node class."""
+    node_3.add_child(node_2)
+    node_3.add_child(node_4)
+    node_4.add_child(node_5)
+    node_4.add_child(node_1)
+    
+    assert node_3.children is not None
+    child_node = node_3.get_child(f"{node_4.name}/{node_1.name}")
+    assert child_node is not None
+    assert child_node.name == node_1.name
+
+def test_deep_nested_tree_features_3(
+        node_1: Node,
+        node_2: Node,
+        node_3: Node,
+        node_4: Node,
+        node_5: Node,
+    ) -> None:
+    """Test get_child method of Node class."""
+    node_3.add_child(node_2)
+    node_2.add_child(node_1)
+    node_3.add_child(node_4)
+    node_4.add_child(node_5)
+    
+    
+    assert node_3.children is not None
+    child_node = node_3.get_child(f"{node_2.name}/{node_1.name}")
+    assert child_node is not None
+    assert child_node.name == node_1.name
+
 def test_node_get_child_invalid_name(node_2: Node) -> None:
     """Test get_child method of Node class with invalid name."""
     invalid_name = "invalid_name"
     child_node = node_2.get_child(invalid_name)
+    assert child_node is None
+
+def test_node_get_child_file_node(node_1: Node) -> None:
+    """Test get_child method of file Node class."""
+    name_ = "invalid_name"
+    child_node = node_1.get_child(name_)
     assert child_node is None
 
 
@@ -173,6 +267,7 @@ def test_node_get_child_invalid_path(node_2) -> None:
             ((1024 * 1024 * 1024 * 1024 * 1024), "1.0P"),
             ((1024 * 1024 * 1024 * 1024 * 1024 * 1024), "1.0E"),
             ((1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024), "1.0Z"),
+            ((1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024), f"{1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024 * 1024}B"),
     ],
     )
 def test_node_human_readable_size_large(size: int, expected: str) -> None:

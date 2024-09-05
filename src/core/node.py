@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from datetime import UTC, datetime
 
+BYTE_LENGTH: int = 1024
+
 
 class Node:
     """Node class represents a node in the file system.
@@ -58,11 +60,11 @@ class Node:
         self.relative_path: str = f"{parent_node.relative_path if parent_node and \
                                      parent_node.depth > 0 else '.'}/{name}"
 
-    def __repr__(self) -> str:
+    def __repr__(self) -> str:  # pragma: no cover
         """Return a string representation of the node."""
         return self.name
 
-    def __str__(self) -> str:
+    def __str__(self) -> str:  # pragma: no cover
         """Return a string representation of the node."""
         return self.name
 
@@ -110,7 +112,6 @@ class Node:
         Node
             The child node with the specified name.
 
-
         """
         if "/" not in name_or_path:
             if self.is_directory and self.children is not None:
@@ -130,14 +131,13 @@ class Node:
                 else None
             )
             if child_node is None:
-                return None
+                return child_node
             current_node = child_node
         return current_node
 
     @property
     def human_readable_size(self) -> str:
         """Get human readable size."""
-        BYTE_LENGTH: int = 1024
         units: list[str] = [
             "K",
             "M",

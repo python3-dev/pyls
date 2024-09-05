@@ -113,7 +113,3 @@ def execute_parser() -> None:
         filter_by_type=args.filter,
     )
     print(results)
-
-
-if __name__ == "__main__":
-    execute_parser()
