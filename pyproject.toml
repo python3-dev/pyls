@@ -1,0 +1,98 @@
+[tool.poetry]
+name = "pyls"
+version = "0.1.0"
+description = "'ls' like utility built on Python."
+authors = ["Pratheesh Prakash <pratheeshraniprakash@gmail.com>"]
+license = "GPL-3.0-or-later"
+readme = "README.md"
+packages = [
+    { include = "src" }
+]
+
+[tool.poetry.scripts]
+pyls = "src.cli:execute_parser"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pytest = "^8.3.2"
+ruff = "^0.6.3"
+refurb = "^2.0.0"
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "main.yml",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    ".vscode",
+    ".pytest_cache",
+    "*/schema/",
+    "*/tests/*",
+    "test_*.py",
+]
+target-version = "py312"
+fix = true
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D203",
+    "D213",
+    "E402",
+    "SIM115",
+    "ANN101",
+    "C416",
+    "C419",
+    "DTZ011",
+    "FA102",
+    "CPY001",
+    "T201",
+    "ISC001",
+]
+fixable = ["ALL"]
+unfixable = []
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+exclude = ["*.pyi"]
+
+[tool.ruff.lint.isort]
+case-sensitive = true
+
+[tool.ruff.lint.pylint]
+max-args = 10
+
+[tool.bandit]
+exclude_dirs = ["tests/"]
+
+[tool.mypy]
+exclude = [
+    "tests/",
+]
