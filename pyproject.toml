@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyls"
-version = "1.0.0"
+version = "1.0.1"
 description = "'ls' like utility built on Python."
 authors = ["Pratheesh Prakash <pratheeshraniprakash@gmail.com>"]
 license = "GPL-3.0-or-later"
