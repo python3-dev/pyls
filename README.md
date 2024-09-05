@@ -1,18 +1,9 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
+ <img width=200px height=200px src="docs/pyls.png" alt="pyls logo"></a>
 </p>
 
 <h3 align="center">pyls</h3>
-
-<div align="center">
-
-[![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
-[![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](/LICENSE)
-
-</div>
 
 ---
 
@@ -21,94 +12,66 @@ Python implementation of 'ls'. </br>
 List information about the FILEs (the current directory by default).
 </p>
 
-## Table of Contents
 
-- [Table of Contents](#table-of-contents)
-- [About ](#about-)
-- [Getting Started ](#getting-started-)
-  - [Prerequisites](#prerequisites)
-  - [Installing](#installing)
-- [Running the tests ](#running-the-tests-)
-  - [Break down into end to end tests](#break-down-into-end-to-end-tests)
-  - [And coding style tests](#and-coding-style-tests)
-- [Usage ](#usage-)
-- [Deployment ](#deployment-)
-- [Built Using ](#built-using-)
-- [Authors ](#authors-)
-- [Acknowledgements ](#acknowledgements-)
+## About
 
-## About <a name = "about"></a>
-
-Write about 1-2 paragraphs describing the purpose of your project.
-
-## Getting Started <a name = "getting_started"></a>
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+pyls is a Python implementation of 'ls'. It can be used to list information about the PATHs (the current directory by default).
 
 ### Prerequisites
 
-What things you need to install the software and how to install them.
+pyls can be installed on any system with python 3.12 or higher.
 
-```
-Give examples
-```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
-
-```
-Give the example
+```shell
+git clone https://github.com/python3-dev/pyls.git
+pip install .
 ```
 
-And repeat
+## Running the tests
 
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
-
-## Running the tests <a name = "tests"></a>
-
-Explain how to run the automated tests for this system.
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
+```shell
+git clone https://github.com/python3-dev/pyls.git
+pip install pytest
+pytest
 ```
 
-### And coding style tests
+## Usage
 
-Explain what these tests test and why
+After the installation, pyls could be used just like ls.
+
+The following options are currently available.
 
 ```
-Give an example
+usage: pyls [OPTION]... [PATH]...
+
+pyls -l -r -t -h --filter=[dir, file] <path> --help
+
+positional arguments:
+  path                  path to list
+
+options:
+  -A                    do not ignore entries starting with .
+  -l                    use a long listing format
+  -r                    reverse order while sorting
+  -t                    sort by time, newest first
+  -h                    with -l, print sizes like 1K 234M 2G etc.
+  --filter [{dir,file}] filter results by type: 'dir' or 'file'
+  --help                Show this help message and exit
 ```
 
-## Usage <a name="usage"></a>
 
-Add notes about how to use the system.
-
-## Deployment <a name = "deployment"></a>
-
-Add additional notes about how to deploy this on a live system.
-
-## Built Using <a name = "built_using"></a>
+## Built Using
 
 - [Python](https://www.python.org/)
 - [Pytest](https://pytest.org/)
 
 
-## Authors <a name = "authors"></a>
+## Authors
 
-- [@python3-dev](https://github.com/python3-dev)
+- [Pratheesh Prakash](https://github.com/python3-dev)
 
-## Acknowledgements <a name = "acknowledgement"></a>
+## License
 
-- References
+[GNU General Public License](https://fsf.org/licensing/licenses/gpl-3.0.html)
